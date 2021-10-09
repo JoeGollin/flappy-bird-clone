@@ -54,7 +54,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\MoveBird.cs" />
-    <Compile Include="Assets\MovePrefab.cs" />
+    <Compile Include="Assets\Scripts\InstantiatePrefab.cs" />
+    <Compile Include="Assets\Scripts\MoveWalls.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
