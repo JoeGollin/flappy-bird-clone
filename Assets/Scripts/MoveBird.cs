@@ -7,18 +7,17 @@ public class MoveBird : MonoBehaviour
 {
     private Rigidbody2D rigidbody2d;
     private float spriteYPos;
-    public int playerScore;
-    public int displayScore;
-    public Text scoreUI;
+    private float spriteXPos;
+    public AudioClip coinAudio;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody2d = transform.GetComponent<Rigidbody2D>();
         spriteYPos = transform.position.y;
-        playerScore = 0;
-        displayScore = 0;
-        StartCoroutine(ScoreUpdater());
+        spriteXPos = transform.position.x;
+        audioSource = GetComponent<AudioSource>();
 
     }
 
@@ -26,8 +25,9 @@ public class MoveBird : MonoBehaviour
     void Update()
     {
         Mathf.FloorToInt(Time.timeSinceLevelLoad);
-
         spriteYPos = transform.position.y;
+        spriteXPos = transform.position.x;
+
         if (spriteYPos < 4.5)
         {
             if (Input.GetKeyDown(KeyCode.Space))
@@ -39,21 +39,30 @@ public class MoveBird : MonoBehaviour
 
         if (spriteYPos < -4)
         {
-            print ("bird off screen");
+            print ("bird off bottom screen");
+        }
+
+        if (spriteXPos < -8)
+        {
+            print("Bird off left of screen");
+        }
+        if (Input.GetKeyDown(KeyCode.Escape) == true)
+        {
+            Application.Quit();
         }
     }
 
-    private IEnumerator ScoreUpdater()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        while (true)
+        if (collision.gameObject.name == "CoinPrefab(Clone)")
         {
-            if (displayScore < playerScore)
-            {
-                displayScore++;
-                scoreUI.text = displayScore.ToString();
-            }
-            yield return new WaitForSeconds(0.2f);
+            print("Collision Detected With Coin");
+            Destroy(collision.gameObject);
+            KeepScore scoreScript = GetComponent<KeepScore>();
+            scoreScript.scoreAmount += 10;
+            audioSource.PlayOneShot(coinAudio, 0.5f);
+            
         }
-        
     }
+
 }

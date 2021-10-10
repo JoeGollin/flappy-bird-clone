@@ -18,4 +18,5 @@ public class MoveWalls : MonoBehaviour
     {
         transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
     }
+
 }

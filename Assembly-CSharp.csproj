@@ -56,6 +56,7 @@
     <Compile Include="Assets\Scripts\MoveBird.cs" />
     <Compile Include="Assets\Scripts\InstantiatePrefab.cs" />
     <Compile Include="Assets\Scripts\MoveWalls.cs" />
+    <Compile Include="Assets\Scripts\KeepScore.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
